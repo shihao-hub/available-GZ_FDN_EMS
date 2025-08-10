@@ -151,7 +151,7 @@ REST_FRAMEWORK = {
     ],
     # 权限相关配置
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.IsAuthenticated', # 仅限已经通过身份验证的用户访问
+        'rest_framework.permissions.IsAuthenticated',  # 仅限已经通过身份验证的用户访问
         # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # 未经身份验证的请求将获得只读读的权限
     ],
     'UNAUTHENTICATED_USER': None,  # 未认证时不设置匿名用户
@@ -180,4 +180,7 @@ SPECTACULAR_SETTINGS = {
     'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
+
+    # todo: 接口文档也得设置成有权限才能使用吧？类似 drf 的文档。以下设置无效的（主要还得是 fastapi 呢）
+    "DEFAULT_PERMISSION_CLASSES": REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"],
 }
