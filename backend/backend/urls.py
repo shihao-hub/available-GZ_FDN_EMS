@@ -31,6 +31,8 @@ urlpatterns = [
 
     # 【知识点】【DRF 的用户登录页面】
     path('api-auth/', include('rest_framework.urls')),
+
+    path('authentication/', include('apps.authentication.urls')),
 ]
 
 # 【知识点】django-debug-toolbar，但是必须页面有 <body> 标签才能嵌入，这个似乎主要还是与传统 django 搭配使用的？

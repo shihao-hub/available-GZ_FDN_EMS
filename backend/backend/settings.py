@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "debug_toolbar",  # todo: debug 需要配置的不止这一个地方
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 【知识点】DRF 首当其先需要配置这个，然后执行 makemigrations 和 migrate
+    # 【知识点】【第三方库】DRF 首当其先需要配置这个，然后执行 makemigrations 和 migrate
     "rest_framework",
+    # 【知识点】【第三方库】drf_spectacular，drf 的 swagger 文档
     "drf_spectacular",
+    "drf_spectacular_sidecar",
 
     "apps.core",
+    "apps.authentication",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 【知识点】【第三方库】django 的国际化
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -58,6 +65,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 【知识点】django 默认会去 app 下的 templates 目录下寻找模板文件，其他目录需要手动配置
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -114,7 +122,10 @@ USE_TZ = False  # 关闭时区支持（适用场景：如果你的用户和服�
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# 【知识点】STATIC_URL 推荐 /static/，带个前缀。django-admin 默认生成的不带这个前缀
+STATIC_URL = '/static/'
+
+# 【知识点】django `BASE_DIR / "static" /` 不是默认的，需要手动配置
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -157,4 +168,16 @@ REST_FRAMEWORK = {
 
     # 【知识点】drf_spectacular 接口文档生成，必填项
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# ======= drf_spectacular ====== #
+SPECTACULAR_SETTINGS = {
+    'TITLE': '贵州山区柔性配电网络多维度评估系统 - 接口文档',
+    'DESCRIPTION': '',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # 【知识点】drf_spectacular 配置静态资源为 drf_spectacular_sidecar，而不是从 cnd 取
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
 }

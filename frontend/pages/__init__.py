@@ -8,6 +8,7 @@
 def register_pages():
     from . import (
         home,
+        login,
         multi_dimensional_evaluation,
         photovoltaic_bearing_capacity,
         power_flow_calculation,

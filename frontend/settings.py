@@ -1,8 +1,11 @@
+import os
 from pathlib import Path
 
 SOURCE_DIR = Path(__file__).resolve().parent
 
 DEBUG = True
+
+BACKEND_BASE_URL = "http://localhost:12002"
 
 TITLE = "贵州山区柔性配电网络多维度评估系统"
 FAVICON = None
@@ -16,12 +19,12 @@ STORAGE_SECRET = None
 # 选项卡的配置信息
 TAB_CONFIGS = [
     {
-        "id": "系统概览",
-        "name": "系统概览",
-        "title": "系统概览",
-        "url": "/system-overview",
-        "favicon": None,
-        "icon": "home",  # todo: 修改默认值，home 只是暂时的
+        "id": "系统概览",  # id
+        "name": "系统概览",  # 名称
+        "title": "系统概览",  # 标题
+        "url": "/system-overview",  # url
+        "favicon": None,  # favicon 图标
+        "icon": "home",  # icon 图标
     },
     {
         "id": "拓扑结构",

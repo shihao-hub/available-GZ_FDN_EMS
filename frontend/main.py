@@ -1,10 +1,12 @@
 from nicegui import ui, app
 
+from loguru import logger
+
 import settings
-from ui.pages import register_pages
+import pages
 
 # 注册 pages
-register_pages()
+pages.register_pages()
 
 # 挂载静态资源
 app.add_static_files("/static", str(settings.SOURCE_DIR / "static"))
