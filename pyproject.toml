@@ -9,18 +9,23 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "aerich>=0.9.1",
     "aiohttp>=3.12.15",
+    "aiosqlite>=0.21.0",
+    "deprecation>=2.1.0",
     "django>=5.2.5",
     "django-debug-toolbar>=6.0.0",
     "django-extensions>=4.1",
     "django-filter>=25.1",
     "djangorestframework>=3.16.1",
+    "djangorestframework-simplejwt>=5.5.1",
     "drf-spectacular>=0.28.0",
     "drf-spectacular-sidecar>=2025.8.1",
     "ex4nicegui>=0.8.10",
     "ipython>=9.4.0",
     "loguru>=0.7.3",
     "lupa>=2.5",
+    "matplotlib>=3.10.5",
     "nicegui>=2.22.2",
     "nicegui-highcharts>=2.1.0",
     "nicegui-tabulator>=0.2.2",
@@ -29,9 +34,18 @@ dependencies = [
     "numpy>=2.3.2",
     "pandapower>=3.1.2",
     "pandas>=2.3.1",
+    "pyecharts>=2.0.8",
     "pyinstaller>=6.15.0",
     "python-dotenv>=1.1.1",
+    "pywebview>=6.0",
     "requests>=2.32.4",
     "schema>=0.7.7",
+    "tortoise-orm>=0.25.1",
+    "tqdm>=4.67.1",
     "whitenoise>=6.9.0",
 ]
+
+[tool.aerich]
+tortoise_orm = "frontend.settings.TORTOISE_ORM"
+location = "./migrations"
+src_folder = "./."

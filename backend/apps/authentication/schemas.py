@@ -50,15 +50,25 @@ class UserOut(UserBase):
 
 class UserRegisterIn(serializers.Serializer):
     # todo: 进行复杂校验，比如：用户名格式/用户名是否存在/密码格式/密码长度 等
-    username = serializers.CharField(max_length=100)
-    password = serializers.CharField(max_length=100)
+    username = serializers.CharField(max_length=10)
+    password = serializers.CharField(max_length=20)
 
 
 class UserLoginIn(UserRegisterIn):
-    username = serializers.CharField(max_length=10)
+    username = serializers.CharField(max_length=10) # 无意义，单纯练习一下覆盖操作
+
+
+class UserLogoutIn(serializers.Serializer):
+    refresh_token = serializers.CharField(max_length=1000)
 
 
 class UserRegisterOut(serializers.ModelSerializer):
+    # 无异于，单纯联系一下 Meta（用户注册返回值只需要一个 username 而已）
     class Meta:
         model = models.User
         fields = ("username",)
+
+
+class UserChangePasswordIn(UserRegisterIn):
+    new_password = serializers.CharField(max_length=20)
+    confirm_password = serializers.CharField(max_length=20)

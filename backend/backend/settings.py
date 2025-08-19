@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     # 【知识点】【第三方库】drf_spectacular，drf 的 swagger 文档
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",  # 这个 app 用于刷新 refresh_token 后，将旧的加到到 blacklist 时使用
 
     "apps.core",
     "apps.authentication",
@@ -50,6 +52,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,7 +137,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# -------------------------------------------------------------------------------------------------------------------- #
+# ====== drf ====== #
 # DRF 配置字典
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -164,6 +168,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
         # 'rest_framework.authentication.TokenAuthentication',
+
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     # "URL_FIELD_NAME": 'link', # todo: [to be understood] URL_FIELD_NAME
 
@@ -184,4 +190,12 @@ SPECTACULAR_SETTINGS = {
 
     # todo: 接口文档也得设置成有权限才能使用吧？类似 drf 的文档。以下设置无效的（主要还得是 fastapi 呢）
     "DEFAULT_PERMISSION_CLASSES": REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"],
+}
+
+# ====== simple_jwt ====== #
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True,  # 刷新令牌时，将旧刷新令牌加入黑名单
+    'BLACKLIST_AFTER_ROTATION': True,  # 启用黑名单功能
+    # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }

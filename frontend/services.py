@@ -1,9 +1,6 @@
 from aiohttp.web import Request
 
-
-def set_authorization(self, request: Request):
-    """给请求头设置 authorization 字段"""
-
+# todo: 待定文件，目前的将函数一股脑塞进 utils.py 文件的，之后再说吧
 
 class SystemOverview:
     """系统概览"""

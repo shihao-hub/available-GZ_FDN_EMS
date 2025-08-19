@@ -1,0 +1,17 @@
+﻿indicator,raw,larger_is_better,score_0_100
+safety.MLF_pct,0.0002730088128224,False,99.97270657006466
+safety.Sline_overload_rate_pct,0.0,False,100.0
+safety.Ssub_overload_rate_pct,,False,
+safety.LN1_pass_pct,100.0,True,99.00990099009901
+reliability.voltage_deviation_pct,3.9562848488026976,False,20.17640290068422
+reliability.voltage_fluctuation_pct,0.6285078227320757,False,61.40590705436981
+reliability.unbalance_pct,,False,
+reliability.THD_pct,,False,
+economic.loss_rate_pct,,False,
+economic.revenue_yuan,27019.36036427623,True,99.99629908710868
+economic.carbon_benefit_yuan,13432.482009668753,True,99.99255591365456
+economic.OM_cost_yuan,339.02857768911406,False,0.2940929279521598
+environment.RPG_pct,,True,
+environment.Fgen_pct,,True,
+environment.AQ_index,,True,
+environment.land_use_index,,True,
